@@ -7,7 +7,6 @@
 import numpy
 from matplotlib import pyplot
 from matplotlib import animation
-import pylab
 
 ambient_temperature = 300. # K
 flame_temperature = 1000. # K
@@ -43,46 +42,3 @@ def heat_conduction():
     return temperatures_old
 
 temperatures = heat_conduction()
-
-# Stationary plot
-def plot_me():
-    for (pos, temp) in data:
-        pyplot.plot(pos, temp)
-    axes = pyplot.gca()                
-    axes.set_xlabel('Position in m')
-    axes.set_ylabel('Temperature in K')
-    pyplot.show()
-
-# plot_me()
-
-# Animation
-
-# First set up the figure, the axis, and the plot element we want to animate
-fig = pyplot.figure()
-ax = pyplot.axes(xlim=(0, 0.1), ylim=(100, 1000))
-line, = ax.plot([], [], lw=2)
-time_text = ax.text(0.02, 0.95, '', transform=ax.transAxes)
-axes = pyplot.gca()
-pyplot.title('Heat Conduction')
-axes.set_xlabel('Position in m')
-axes.set_ylabel('Temperature in K')
-
-# initialization function: Plot the background of each frame
-def init():
-    line.set_data([], [])
-    return line,
-
-# animation fucntion. This is called sequentially
-def animate(i):
-    x = data[i][0]
-    y = data[i][1]
-
-    line.set_data(x,y)
-    time_text.set_text('step = %.1f' % i)
-    return line,
-
-# call the animator
-anim = animation.FuncAnimation(fig, animate, init_func=init, frames=len(data), interval=20)
-
-# pyplot.show()
-
