@@ -33,7 +33,7 @@ wood_2 = 70. # kg / m2
 
 length = 650. # meters; domain extends from -length to +length
 # A grid size of 50 x 50 ist much too small to see the correct result. For a better result, set the size to 200 x 200. That computation would, however, be far too long for the Web-based development environment. You may want to run it offline.
-size = 50 # number of points per dimension of the grid
+size = 200 # number of points per dimension of the grid
 dx = 2. * length / size
 # Pick a time step below the threshold of instability
 h = 0.2 * dx ** 2 / diffusion_coefficient # s
