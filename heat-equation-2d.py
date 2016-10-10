@@ -56,7 +56,7 @@ def plot_me():
     axes.set_xlabel('Position x in m')
     axes.set_ylabel('Position y in m')                
     pyplot.show()
-plot_me()
+# plot_me()
 
 # Animation
 print "animation start"
@@ -80,6 +80,6 @@ def animate(i):
 
 # call the animator
 print len(data)
-anim = animation.FuncAnimation(fig, animate, frames=len(data), interval=10)
+anim = animation.FuncAnimation(fig, animate, frames=len(data), interval=30)
 
 pyplot.show()
