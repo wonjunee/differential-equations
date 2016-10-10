@@ -9,7 +9,8 @@ from matplotlib import pyplot
 from matplotlib import animation
 
 # Call the data
-execfile("thermal-programming_data_only.py")
+# execfile("thermal-programming_data_only.py")
+execfile("wind-shift.py")
 
 title = "Heat Conduction"
 xlabel = "Position in m"
@@ -17,7 +18,7 @@ ylabel = "Temperature in K"
 
 # First set up the figure, the axis, and the plot element we want to animate
 fig = pyplot.figure()
-ax = pyplot.axes(xlim=(0, 0.1), ylim=(100, 1000))
+ax = pyplot.axes(xlim=(0, 0.2), ylim=(100, 1200))
 line, = ax.plot([], [], lw=2)
 time_text = ax.text(0.02, 0.95, '', transform=ax.transAxes)
 

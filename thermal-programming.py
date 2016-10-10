@@ -7,7 +7,6 @@
 import numpy
 from matplotlib import pyplot
 from matplotlib import animation
-import pylab
 
 ambient_temperature = 300. # K
 flame_temperature = 1000. # K

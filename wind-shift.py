@@ -5,7 +5,9 @@
 # variable of the same name).
 
 import math
-from udacityplots import *
+import numpy
+from matplotlib import pyplot
+from matplotlib import animation
 
 ambient_temperature = 300. # K
 flame_temperature = 1000. # K
@@ -32,7 +34,7 @@ def heat_conduction():
             data.append(([pos for pos in positions], 
                           [temp for temp in temperatures_old]))
         for i in range(1, size - 1):
-            temperatures_new[i] = tempeartures_old[i] \
+            temperatures_new[i] = temperatures_old[i] \
                                 -h * velocity / (2*dx) \
                                 * (temperatures_old[i+1]-temperatures_old[i-1])
         temperatures_old, temperatures_new = temperatures_new, temperatures_old
@@ -41,14 +43,16 @@ def heat_conduction():
 
 temperatures = heat_conduction()
 
-@show_plot
 def plot_me():
     for (pos, temp) in data:
-        matplotlib.pyplot.plot(pos, temp)
-    axes = matplotlib.pyplot.gca()                
+        pyplot.plot(pos, temp)
+    axes = pyplot.gca()                
     axes.set_xlabel('Position in m')
     axes.set_ylabel('Temperature in K')
+    pyplot.show()
 
 plot_me()
+
+
 
 
