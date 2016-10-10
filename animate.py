@@ -1,7 +1,7 @@
 """
 This is the script that animate the data from the python scripts.
 The script that is called in execfile function should contain
-the data array that contains series of x values and y values.
+the data array that contains the series of x values and y values.
 """
 
 import numpy
