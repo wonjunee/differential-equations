@@ -10,7 +10,7 @@ from matplotlib import animation
 
 # Call the data
 # execfile("thermal-programming_data_only.py")
-# execfile("conduction-implicit.py")
+execfile("hanging-rope.py")
 
 title = "Heat Conduction"
 xlabel = "Position in m"
@@ -18,7 +18,7 @@ ylabel = "Temperature in K"
 
 # First set up the figure, the axis, and the plot element we want to animate
 fig = pyplot.figure()
-ax = pyplot.axes(xlim=(0, 0.1), ylim=(100, 1200))
+ax = pyplot.axes(xlim=(-.5, 2.5), ylim=(-1.0, 2.0))
 line, = ax.plot([], [], lw=2)
 time_text = ax.text(0.02, 0.95, '', transform=ax.transAxes)
 

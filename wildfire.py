@@ -18,7 +18,7 @@ import matplotlib.cm
 diffusion_coefficient = 5. # m2 / s
 ambient_temperature = 310. # K
 heat_loss_time_constant = 120. # s
-velocity_x = 0.03 # m / s
+velocity_x = 0.11 # m / s
 velocity_y = 0.12 # m / s
 ignition_temperature = 561. # K
 burn_temperature = 1400. # K
@@ -33,11 +33,11 @@ wood_2 = 70. # kg / m2
 
 length = 650. # meters; domain extends from -length to +length
 # A grid size of 50 x 50 ist much too small to see the correct result. For a better result, set the size to 200 x 200. That computation would, however, be far too long for the Web-based development environment. You may want to run it offline.
-size = 200 # number of points per dimension of the grid
+size = 100 # number of points per dimension of the grid
 dx = 2. * length / size
 # Pick a time step below the threshold of instability
 h = 0.2 * dx ** 2 / diffusion_coefficient # s
-end_time = 60. * 60. # s
+end_time = 90. * 60. # s
 
 data = [] 
 
@@ -54,7 +54,7 @@ def wildfire():
         for i in range(0, size):
             x, y = grid2physical(i, j)
             temperatures_old[j][i] = (burn_temperature - ambient_temperature) * \
-                math.exp(-((x + 50.) ** 2 + (y + 250.) ** 2) / (2. * 50. ** 2)) \
+                math.exp(-((x + 250.) ** 2 + (y + 250.) ** 2) / (2. * 50. ** 2)) \
                 + ambient_temperature
             # Task 2: Replace the following line to fill the array wood_old according to the description, using the values given above.
             # Given:
@@ -63,15 +63,17 @@ def wildfire():
             # Your code here
             intercept = y - slope * x
             w = wood_1 + (wood_2 - wood_1) / (intercept_2 - intercept_1) * (intercept - intercept_1)
+            # w = 100
             wood_old[j][i] = min(wood_1, max(wood_2, w))
 
+    print wood_old
     temperatures_new = numpy.copy(temperatures_old) # K
     wood_new = numpy.copy(wood_old) # kg / m2
 
     num_steps = int(end_time / h)
     for step in range(num_steps):
         if step % 10 == 0:
-            data.append(numpy.copy(temperatures_old))
+            data.append(numpy.copy(wood_old))
 
         for j in range(1, size - 1):
             for i in range(1, size - 1):
@@ -141,13 +143,12 @@ print "animation start"
 fig = pyplot.figure()
 axes = pyplot.gca()
 dimensions = [-length, length, -length, length]
-im = pyplot.imshow(temperatures_old, cmap = matplotlib.cm.hot,
+im = pyplot.imshow(wood_old, cmap = matplotlib.cm.hot,
                          origin = 'lower', extent = dimensions, animated=True)
 pyplot.title('Heat Conduction in 2D: step = 0')
 pyplot.colorbar().set_label('Temperature in K')
 axes.set_xlabel('Position x in m')
 axes.set_ylabel('Position y in m')                
-
 
 # animation fucntion. This is called sequentially
 def animate(i):
