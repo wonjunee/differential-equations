@@ -73,7 +73,7 @@ def wildfire():
     num_steps = int(end_time / h)
     for step in range(num_steps):
         if step % 10 == 0:
-            data.append(numpy.copy(wood_old))
+            data.append(numpy.copy(temperatures_old))
 
         for j in range(1, size - 1):
             for i in range(1, size - 1):
@@ -143,7 +143,7 @@ print "animation start"
 fig = pyplot.figure()
 axes = pyplot.gca()
 dimensions = [-length, length, -length, length]
-im = pyplot.imshow(wood_old, cmap = matplotlib.cm.hot,
+im = pyplot.imshow(data[0], cmap = matplotlib.cm.hot,
                          origin = 'lower', extent = dimensions, animated=True)
 pyplot.title('Heat Conduction in 2D: step = 0')
 pyplot.colorbar().set_label('Temperature in K')
