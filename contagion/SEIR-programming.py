@@ -30,10 +30,13 @@ def seir_model():
 
     for step in range(num_steps):
         ###Your code here.
-        s[step+1] = s[step] + h * (- transmission_coeff * i[step] * s[step])
-        e[step+1] = e[step] + h * (transmission_coeff * i[step] * s[step] - 1. / latency_time * e[step])
-        i[step+1] = i[step] + h * (1. / latency_time * e[step] - 1. / infectious_time * i[step])
-        r[step+1] = r[step] + h * (1. / infectious_time * i[step])
+        s2e = h * transmission_coeff * s[step] * i[step]
+        e2i = h / latency_time * e[step]
+        i2r = h / infectious_time * i[step]
+        s[step+1] = s[step] - s2e
+        e[step+1] = e[step] + s2e - e2i
+        i[step+1] = i[step] + e2i - i2r
+        r[step+1] = r[step] + i2r
         
     return s, e, i, r
 
@@ -47,6 +50,7 @@ def plot_me():
     matplotlib.pyplot.legend(('S', 'E', 'I', 'R'), loc = 'upper right')
     
     axes = matplotlib.pyplot.gca()
+    axes.set_title('SEIR Programming')
     axes.set_xlabel('Time in days')
     axes.set_ylabel('Number of persons')
     matplotlib.pyplot.xlim(xmin = 0.)
