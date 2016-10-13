@@ -65,5 +65,5 @@ def plot_evolution():
         if i%1000==0: 
             data.append([x[:,0],x[:,1]])
             matplotlib.pyplot.plot(x[:, 0],x[:, 1])
-    # matplotlib.pyplot.show()
+    matplotlib.pyplot.show()
 plot_evolution()
