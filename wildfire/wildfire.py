@@ -33,11 +33,11 @@ wood_2 = 70. # kg / m2
 
 length = 650. # meters; domain extends from -length to +length
 # A grid size of 50 x 50 ist much too small to see the correct result. For a better result, set the size to 200 x 200. That computation would, however, be far too long for the Web-based development environment. You may want to run it offline.
-size = 100 # number of points per dimension of the grid
+size = 50 # number of points per dimension of the grid
 dx = 2. * length / size
 # Pick a time step below the threshold of instability
 h = 0.2 * dx ** 2 / diffusion_coefficient # s
-end_time = 90. * 60. # s
+end_time = 100. * 60. # s
 
 data = [] 
 
@@ -82,8 +82,7 @@ def wildfire():
                 # Given:                
                 # wood_new[j][i] = wood_old[j][i]
                 # temperatures_new[j][i] = temp
-                
-                # Your code here
+
                 burn_rate = 0. # kg / m2 s
                 if temp >= ignition_temperature:
                     burn_rate = wood_old[j][i] / burn_time_constant
@@ -134,8 +133,8 @@ def fire_plot():
     axes.set_ylabel('y in m')
     pyplot.show()
 
-fire_plot()   
-
+# 
+# fire_plot()   
 
 # Animation
 print "animation start"
